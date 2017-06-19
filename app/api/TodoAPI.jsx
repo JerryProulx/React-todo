@@ -4,6 +4,7 @@ module.exports = {
   setTodos: function(todos){
     if($.isArray(todos)) {
       localStorage.setItem('todos', JSON.stringify(todos));
+
       return todos;
     }
   },
@@ -27,8 +28,20 @@ module.exports = {
     });
 
     //Filter by searchText
+    filteredTodos =filteredTodos.filter((todo)=>{
+      var text = todo.text.toLowerCase();
+      return text.indexOf(searchText) > -1 || searchText.length === 0;
+    });
 
     //Sort todos with non-completed first
+    filteredTodos.sort((a, b)=>{
+      if(!a.completed && b.completed){
+        return -1;
+      }else if(a.completed && !b.completed){
+        return 1;
+      }
+      return 0;
+    });
 
     return filteredTodos;
   }
