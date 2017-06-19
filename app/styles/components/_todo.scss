@@ -6,7 +6,7 @@
   transition: background .3s ease;
 
   &-completed {
-    .todo-subtext, .todo-subtext {
+    p{
       color: $light-color;
       text-decoration: line-through;
     }
